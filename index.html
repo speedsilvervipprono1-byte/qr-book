@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>QR Book</title>
+
+<style>
+body {
+    margin: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.book {
+    width: 90vw;        /* Chiếm 90% chiều ngang màn hình */
+    height: 90vh;       /* Chiếm 90% chiều cao màn hình */
+    max-width: 900px;
+    max-height: 600px;
+    position: relative;
+    perspective: 2000px;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-origin: left;
+    transition: transform 1s ease;
+    cursor: pointer;
+    background: #000;
+}
+
+.page img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* QUAN TRỌNG cho ảnh ngang */
+    background: #000;
+}
+
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+.page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, rgba(0,0,0,.25), transparent);
+}
+</style>
+</head>
+
+<body>
+
+<div class="book" id="book">
+
+    <div class="page"><img src="images/image0.jpeg"></div>
+    <div class="page"><img src="images/image1.jpeg"></div>
+    <div class="page"><img src="images/image2.jpeg"></div>
+    <div class="page"><img src="images/image3.jpeg"></div>
+    <div class="page"><img src="images/image4.jpeg"></div>
+    <div class="page"><img src="images/image5.jpeg"></div>
+    <div class="page"><img src="images/image6.jpeg"></div>
+    <div class="page"><img src="images/image7.jpeg"></div>
+    <div class="page"><img src="images/image8.jpeg"></div>
+    <div class="page"><img src="images/image9.jpeg"></div>
+    <div class="page"><img src="images/image10.jpeg"></div>
+    <div class="page"><img src="images/image11.jpeg"></div>
+
+</div>
+
+<script>
+const pages = document.querySelectorAll(".page");
+
+pages.forEach((page, index) => {
+    page.style.zIndex = pages.length - index;
+    page.addEventListener("click", () => {
+        page.classList.toggle("flipped");
+    });
+});
+</script>
+
+</body>
+</html>
